@@ -15,12 +15,12 @@ class Graficador:
         self.__contenidoRecursivo(self.arbol.raiz)
 
     def __contenidoRecursivo(self, aux):
-        if aux.derecho is not None:
-            self.contenido = self.contenido + aux.getDato() + " -> " + aux.derecho.getDato() + "\n"
-            self.__contenidoRecursivo(aux.derecho)
         if aux.izquierdo is not None:
             self.contenido = self.contenido + aux.getDato() + " -> " + aux.izquierdo.getDato() + "\n"
             self.__contenidoRecursivo(aux.izquierdo)
+        if aux.derecho is not None:
+            self.contenido = self.contenido + aux.getDato() + " -> " + aux.derecho.getDato() + "\n"
+            self.__contenidoRecursivo(aux.derecho)
         if aux.izquierdo is None or aux.derecho is None:
             return
 

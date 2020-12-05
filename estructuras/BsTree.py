@@ -1,4 +1,5 @@
 import graficadorArboles as Gr
+import random
 
 
 # CLASE PARA EL NODO
@@ -14,18 +15,18 @@ class Node:
         return str(self.dato)
 
 
-class ArbolB:
+class ArbolBS:
     def __init__(self):
         self.raiz = None
 
     def agregar(self, valor):
         if self.raiz is None:
-            self.raiz = self.nuevoNodo(valor)
+            self.raiz = Node(valor)
             self.raiz.altura = 0
         else:
-            self.raiz = self.recursivoAgregar(valor, self.raiz)
+            self.raiz = self.__recursivoAgregar(valor, self.raiz)
 
-    def recursivoAgregar(self, valor, aux):
+    def __recursivoAgregar(self, valor, aux):
         temporal = Node(valor)
         temporal.altura = aux.altura + 1
 
@@ -33,6 +34,9 @@ class ArbolB:
             # print('es menor') SE VA A LA IZQUIERDA
             if aux.izquierdo is None:
                 aux.izquierdo = temporal
+                return aux
+            else:
+                aux.izquierdo = self.__recursivoAgregar(valor, aux.izquierdo)
                 return aux
         elif aux.dato == valor:
             print('El dato ' + str(valor) + ' es repetido y no se admite')
@@ -42,15 +46,15 @@ class ArbolB:
             if aux.derecho is None:
                 aux.derecho = temporal
                 return aux
-        return None
+            else:
+                aux.derecho = self.__recursivoAgregar(valor, aux.derecho)
+                return aux
 
-    def nuevoNodo(self, valor):
-        return Node(valor)
 
+arbol = ArbolBS()
+arbol.agregar(100)
+for i in range(200):
+    arbol.agregar(random.randint(-2000, 2000))
 
-arbol = ArbolB()
-arbol.agregar(5)
-arbol.agregar(2)
-arbol.agregar(6)
 graficador = Gr.Graficador(arbol, 'bs')
 graficador.exportar()
