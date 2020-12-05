@@ -1,3 +1,6 @@
+import graficadorArboles as Gr
+
+
 # CLASE PARA EL NODO
 class Node:
     def __init__(self, dato):
@@ -49,4 +52,5 @@ arbol = ArbolB()
 arbol.agregar(5)
 arbol.agregar(2)
 arbol.agregar(6)
-arbol.agregar(5)
+graficador = Gr.Graficador(arbol, 'bs')
+graficador.exportar()

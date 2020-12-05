@@ -10,26 +10,28 @@ class Graficador:
         elif tipo == 'avl':
             self.titulo = 'Arbol Binario Balanceado AVL'
 
-    def graficar(self):
-        self.contenido = str(self.arbol.dato) + "\n"
-        self.contenidoRecursivo(self.arbol)
+    def __graficar(self):
+        self.contenido = str(self.arbol.raiz.dato) + "\n"
+        self.__contenidoRecursivo(self.arbol.raiz)
 
-    def contenidoRecursivo(self, aux):
+    def __contenidoRecursivo(self, aux):
         if aux.derecho is not None:
-            self.contenido = self.contenido + aux.dato + " -> " + aux.derecho.dato + "\n"
-            self.contenidoRecursivo(aux.derecho)
-        elif aux.izquierdo is not None:
-            self.contenido = self.contenido + aux.dato + " -> " + aux.izquierdo.dato + "\n"
-            self.contenidoRecursivo(aux.izquierdo)
-        else:
+            self.contenido = self.contenido + aux.getDato() + " -> " + aux.derecho.getDato() + "\n"
+            self.__contenidoRecursivo(aux.derecho)
+        if aux.izquierdo is not None:
+            self.contenido = self.contenido + aux.getDato() + " -> " + aux.izquierdo.getDato() + "\n"
+            self.__contenidoRecursivo(aux.izquierdo)
+        if aux.izquierdo is None or aux.derecho is None:
             return
 
     def exportar(self):
-        archivo = open('GraficaArbol.dot', 'w')
+        archivo = open('Resultado/GraficaArbol.dot', 'w')
         archivo.write('digraph D{\n')
-        archivo.write("rankdir=LR; \n")
         archivo.write("node [shape=circle style=filled ] \n")
-        archivo.write("label=  Grafico del " + self.titulo + " \n")
+        archivo.write("label= \" Grafico del " + self.titulo + " \" \n")
+
+        # llenamos el contenido
+        self.__graficar()
 
         # se agrega el contenido al dot
         archivo.write(self.contenido)
@@ -39,4 +41,5 @@ class Graficador:
         archivo.close()
 
         # exportamos
-        os.system('dot -Tpdf DocomentoDot.dot -o Grafico.pdf')
+        os.system('dot -Tpdf Resultado/GraficaArbol.dot -o Grafico.pdf')
+        print('Generado con exito')
