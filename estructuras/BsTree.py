@@ -51,6 +51,7 @@ class ArbolBS:
                 return aux
 
 
+# graficador e ingreso terminado
 arbol = ArbolBS()
 arbol.agregar(100)
 for i in range(200):
