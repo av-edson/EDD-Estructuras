@@ -30,7 +30,7 @@ class Graficador:
         archivo.write("node [shape=circle style=filled ] \n")
         archivo.write("label= \" Grafico del " + self.titulo + " \" \n")
 
-        # llenamos el contenido
+        # llenamos el contenido alv
         self.__graficar()
 
         # se agrega el contenido al dot
