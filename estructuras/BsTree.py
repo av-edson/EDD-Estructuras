@@ -49,6 +49,9 @@ class ArbolBS:
             else:
                 aux.derecho = self.__recursivoAgregar(valor, aux.derecho)
                 return aux
+    
+    def buscarElemento(self, valor):
+        print(valor)
 
 
 # graficador e ingreso terminado
