@@ -49,16 +49,33 @@ class ArbolBS:
             else:
                 aux.derecho = self.__recursivoAgregar(valor, aux.derecho)
                 return aux
-    
-    def buscarElemento(self, valor):
-        print(valor)
+
+    def buscarElemento(self, valor, arbol):
+        if arbol is None:
+            return False
+        elif valor < arbol.dato:
+            return self.buscarElemento(valor, arbol.izquierdo)
+        elif valor > arbol.dato:
+            return self.buscarElemento(valor, arbol.derecho)
+        else:
+            return True
 
 
 # graficador e ingreso terminado
 arbol = ArbolBS()
-arbol.agregar(100)
-for i in range(200):
-    arbol.agregar(random.randint(-2000, 2000))
+arbol.agregar(50)
+for i in range(20):
+    if i == 10:
+        arbol.agregar(15)
+        continue
+    elif i == 18:
+        arbol.agregar(76)
+        continue
+    arbol.agregar(random.randint(0, 100))
 
 graficador = Gr.Graficador(arbol, 'bs')
 graficador.exportar()
+print(arbol.buscarElemento(15, arbol.raiz))
+print(arbol.buscarElemento(76, arbol.raiz))
+print(arbol.buscarElemento(150, arbol.raiz))
+print(arbol.buscarElemento(-150, arbol.raiz))
