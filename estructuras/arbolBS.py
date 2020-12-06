@@ -76,10 +76,8 @@ class ArbolBS:
                 # borramos relacion izquierda
                 else:
                     padre.izquierdo = None
-                return True
             # tiene un hijo derecho
             elif arbol.derecho is not None and arbol.izquierdo is None:
-                print('hijo derecho')
                 if padre.derecho == arbol:
                     padre.derecho = arbol.derecho
                 else:
