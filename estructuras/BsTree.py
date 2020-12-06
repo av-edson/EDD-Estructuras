@@ -53,6 +53,7 @@ class ArbolBS:
 
 # graficador e ingreso terminado
 arbol = ArbolBS()
+# agregamos numeros
 arbol.agregar(100)
 for i in range(200):
     arbol.agregar(random.randint(-2000, 2000))
