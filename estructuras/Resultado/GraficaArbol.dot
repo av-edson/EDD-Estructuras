@@ -2,21 +2,7 @@ digraph D{
 node [shape=circle style=filled ] 
 label= " Grafico del Arbol Binario De Busqueda BS " 
 50
-50 -> 41
-41 -> 10
-10 -> 18
-18 -> 15
-18 -> 24
-50 -> 78
-78 -> 70
-70 -> 63
-63 -> 59
-70 -> 73
-73 -> 76
-78 -> 80
-80 -> 84
-84 -> 90
-90 -> 89
-90 -> 97
+50 -> 48
+50 -> 52
 
 }

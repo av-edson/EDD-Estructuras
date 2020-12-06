@@ -60,22 +60,40 @@ class ArbolBS:
         else:
             return True
 
+    def eliminarElemento(self, valor, arbol, padre):
+        if arbol is None:
+            print('El elemento a Eliminar no Existe :)')
+            return False
+        elif valor < arbol.dato:
+            self.eliminarElemento(valor, arbol.izquierdo, arbol)
+        elif valor > arbol.dato:
+            self.eliminarElemento(valor, arbol.derecho, arbol)
+        else:
+            # es una hoja
+            if arbol.izquierdo is None and arbol.derecho is None:
+                # borramos relacion derecha
+                if padre.derecho == arbol:
+                    padre.derecho = None
+                # borramos relacion izquierda
+                else:
+                    padre.izquierdo = None
+                return True
+
 
 # graficador e ingreso terminado
 arbol = ArbolBS()
 arbol.agregar(50)
-for i in range(20):
-    if i == 10:
-        arbol.agregar(15)
-        continue
-    elif i == 18:
-        arbol.agregar(76)
-        continue
-    arbol.agregar(random.randint(0, 100))
+arbol.agregar(52)
+arbol.agregar(48)
+arbol.agregar(55)
+arbol.agregar(43)
+
+# para graficar
+graficador = Gr.Graficador(arbol, 'bs')
+graficador.exportar()
+
+arbol.eliminarElemento(43, arbol.raiz, None)
+arbol.eliminarElemento(55, arbol.raiz, None)
 
 graficador = Gr.Graficador(arbol, 'bs')
 graficador.exportar()
-print(arbol.buscarElemento(15, arbol.raiz))
-print(arbol.buscarElemento(76, arbol.raiz))
-print(arbol.buscarElemento(150, arbol.raiz))
-print(arbol.buscarElemento(-150, arbol.raiz))
