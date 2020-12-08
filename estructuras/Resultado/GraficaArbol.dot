@@ -1,15 +1,23 @@
 digraph D{
 node [shape=circle style=filled ] 
-label= " Grafico del Arbol Binario De Busqueda BS " 
-56
-56 -> 50
-50 -> 48
-48 -> 40
-48 -> 49
-50 -> 53
-53 -> 51
-53 -> 54
-56 -> 57
-57 -> 60
+label= " Grafico del Arbol Binario Balanceado AVL " 
+"60
+2" -> "55
+1" 
+"55
+1" -> "50
+0" 
+"55
+1" -> "58
+0" 
+"60
+2" -> "66
+1" 
+"66
+1" -> "65
+0" 
+"66
+1" -> "70
+0" 
 
 }
