@@ -41,6 +41,8 @@ class AvlTree:
                 arbol.derecho = Nodo(valor)
             else:
                 arbol.derecho = self.__recursiveAdd(valor, arbol.derecho)
+            if abs(self.__getPesoNodo(arbol.derecho) - self.__getPesoNodo(arbol.izquierdo)) >= 2:
+                arbol = self.__simpleDerecha(arbol)
         arbol.peso = self.__pesoMax(arbol) + 1
         return arbol
 
@@ -56,10 +58,18 @@ class AvlTree:
         else:
             return self.__getPesoNodo(nodo.izquierdo)
 
-    def __simpleIzquierda(self,arbol):
+    def __simpleIzquierda(self, arbol):
         aux = arbol.izquierdo
         arbol.izquierdo = aux.derecho
         aux.derecho = arbol
+        arbol.peso = self.__pesoMax(arbol) + 1
+        aux.peso = self.__pesoMax(aux) + 1
+        return aux
+
+    def __simpleDerecha(self, arbol):
+        aux = arbol.derecho
+        arbol.derecho = aux.izquierdo
+        aux.izquierdo = arbol
         arbol.peso = self.__pesoMax(arbol) + 1
         aux.peso = self.__pesoMax(aux) + 1
         return aux
