@@ -32,6 +32,8 @@ class AvlTree:
                 arbol.izquierdo = Nodo(valor)
             else:
                 arbol.izquierdo = self.__recursiveAdd(valor, arbol.izquierdo)
+            if abs(self.__getPesoNodo(arbol.derecho) - self.__getPesoNodo(arbol.izquierdo)) >= 2:
+                arbol = self.__simpleIzquierda(arbol)
         elif valor == arbol.dato:
             print('valor repetido')
         else:
@@ -54,13 +56,27 @@ class AvlTree:
         else:
             return self.__getPesoNodo(nodo.izquierdo)
 
+    def __simpleIzquierda(self,arbol):
+        aux = arbol.izquierdo
+        arbol.izquierdo = aux.derecho
+        aux.derecho = arbol
+        arbol.peso = self.__pesoMax(arbol) + 1
+        aux.peso = self.__pesoMax(aux) + 1
+        return aux
+
 
 
 
 g = AvlTree();
 g.agregar(50)
-for i in range(15):
-    g.agregar(rd.randint(0, 100))
-graficador  = graf.Graficador(g, 'avl')
-graficador.exportar()
+
+while True:
+    numero = input("Ingrese Numero: ")
+    try:
+        g.agregar(int(numero))
+    except:
+        print("Error ex")
+    finally:
+        graficador = graf.Graficador(g, "avl")
+        graficador.exportar()
 
