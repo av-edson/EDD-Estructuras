@@ -30,6 +30,8 @@ class Graficador:
                 self.contenido = self.contenido + aux.getDato() + " -> " + aux.derecho.getDato() + "\n"
             self.__contenidoRecursivo(aux.derecho)
         if aux.izquierdo is None or aux.derecho is None:
+            if aux.dato == self.arbol.raiz.dato and self.tipo == "avl":
+                self.contenido = self.contenido + "\"" + aux.getDato() + "\n" + str(aux.peso) + "\""
             return
 
     def exportar(self):

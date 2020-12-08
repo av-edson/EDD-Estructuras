@@ -90,23 +90,91 @@ class AvlTree:
 
     # para eliminar Nodos
     def eliminarNodo(self, valor):
-        self.__eliminar(valor, self.raiz, None)
+        self.raiz = self.__eliminar(valor, self.raiz, None)
+
+    def __getNoHijos(self, nodo):
+        if nodo.derecho is None and nodo.izquierdo is None:
+            return 0
+        if nodo.derecho is not None and nodo.izquierdo is None:
+            return 1
+        elif nodo.derecho is None and nodo.izquierdo is not None:
+            return 1
+        else:
+            return 2
+
+    def __getNodoRemplazo(self, nodo):
+        if nodo.derecho is not None:
+            return self.__getNodoRecursivo(nodo.derecho, 1)
+        else:
+            return self.__getNodoRecursivo(nodo.izquierdo, 2)
+
+    def __getNodoRecursivo(self, nodo, tipo):
+        if tipo == 1:
+            if nodo.izquierdo is None:
+                return nodo
+            else:
+                return self.__getNodoRecursivo(nodo.izquierdo, 1)
+        else:
+            if nodo.derecho is None:
+                return nodo
+            else:
+                return self.__getNodoRecursivo(nodo.derecho, 2)
 
     def __eliminar(self, valor, arbol, padre):
         if arbol is None:
             print("Valor no Existente en el Arbol")
             return
         elif valor == arbol.dato:
-            if padre.derecho == arbol:
+            if padre is None:
+                aux = self.__getNodoRemplazo(arbol)
+                arbol.dato = aux.dato
+            elif padre.derecho == arbol:
+                # si es hoja
                 if self.__getPesoNodo(arbol) == 0:
                     padre.derecho = None
+                # un solo hijo
+                elif self.__getNoHijos(arbol) == 1:
+                    # hijo izquierdo
+                    if arbol.derecho is None:
+                        padre.derecho = arbol.izquierdo
+                        # hijo derecho
+                    else:
+                        padre.derecho = arbol.derecho
+                else:
+                    print("dos hijos")
             else:
                 if self.__getPesoNodo(arbol) == 0:
                     padre.izquierdo = None
+                elif self.__getNoHijos(arbol) == 1:
+                    # hijo izquierdo
+                    if arbol.derecho is None:
+                        padre.izquierdo = arbol.izquierdo
+                        # hijo derecho
+                    else:
+                        padre.izquierdo = arbol.derecho
+                else:
+                    print("dos hijos")
+            # verificamos la estructura del arbol
+            x = self.__getPesoNodo(padre.derecho)
+            y = self.__getPesoNodo(padre.izquierdo)
+            if abs(self.__getPesoNodo(padre.derecho) - self.__getPesoNodo(padre.izquierdo)) >= 2:
+                if self.__getPesoNodo(padre.derecho) > self.__getPesoNodo(padre.izquierdo):
+                    arbol = self.__ordenarArbol(valor, padre, 1)
+                else:
+                    arbol = self.__ordenarArbol(valor, padre, -1)
+            return arbol
         elif valor < arbol.dato:
-            self.__eliminar(valor, arbol.izquierdo, arbol)
+            return self.__eliminar(valor, arbol.izquierdo, arbol)
         else:
-            self.__eliminar(valor, arbol.derecho, arbol)
+            return self.__eliminar(valor, arbol.derecho, arbol)
+
+    def __ordenarArbol(self, valor, nodo, direccion):
+        if direccion == 1:
+            print("derecho")
+            return self.__simpleDerecha(nodo)
+        else:
+            print("izquierdo")
+            return self.__simpleIzquierda(nodo)
 
 
 def mostrarMenu():
