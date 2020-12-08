@@ -88,16 +88,43 @@ class AvlTree:
         arbol.derecho = self.__simpleIzquierda(arbol.derecho)
         return self.__simpleDerecha(arbol)
 
+    # para eliminar Nodos
+    def eliminarNodo(self, valor):
+        self.__eliminar(valor, self.raiz, None)
+
+    def __eliminar(self, valor, arbol, padre):
+        if arbol is None:
+            print("Valor no Existente en el Arbol")
+            return
+        elif valor == arbol.dato:
+            if padre.derecho == arbol:
+                if self.__getPesoNodo(arbol) == 0:
+                    padre.derecho = None
+            else:
+                if self.__getPesoNodo(arbol) == 0:
+                    padre.izquierdo = None
+        elif valor < arbol.dato:
+            self.__eliminar(valor, arbol.izquierdo, arbol)
+        else:
+            self.__eliminar(valor, arbol.derecho, arbol)
 
 
+def mostrarMenu():
+    print("1 - para agregar")
+    print("2 - para eliminar")
+    return input("Ingrese Opcion: ")
 
-g = AvlTree();
+
+g = AvlTree()
 g.agregar(50)
-
 while True:
+    opcion = mostrarMenu()
     numero = input("Ingrese Numero: ")
     try:
-        g.agregar(int(numero))
+        if opcion == "1":
+            g.agregar(int(numero))
+        elif opcion == "2":
+            g.eliminarNodo(int(numero))
     except:
         print("Error ex")
     finally:

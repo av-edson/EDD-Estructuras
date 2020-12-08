@@ -1,23 +1,8 @@
 digraph D{
 node [shape=circle style=filled ] 
 label= " Grafico del Arbol Binario Balanceado AVL " 
-"60
-2" -> "55
+"50
+2" -> "30
 1" 
-"55
-1" -> "50
-0" 
-"55
-1" -> "58
-0" 
-"60
-2" -> "66
-1" 
-"66
-1" -> "65
-0" 
-"66
-1" -> "70
-0" 
 
 }
