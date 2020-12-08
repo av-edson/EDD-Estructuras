@@ -33,7 +33,10 @@ class AvlTree:
             else:
                 arbol.izquierdo = self.__recursiveAdd(valor, arbol.izquierdo)
             if abs(self.__getPesoNodo(arbol.derecho) - self.__getPesoNodo(arbol.izquierdo)) >= 2:
-                arbol = self.__simpleIzquierda(arbol)
+                if valor > int(arbol.izquierdo.dato):
+                    arbol = self.__dobleIzquierda(arbol)
+                else:
+                    arbol = self.__simpleIzquierda(arbol)
         elif valor == arbol.dato:
             print('valor repetido')
         else:
@@ -42,7 +45,10 @@ class AvlTree:
             else:
                 arbol.derecho = self.__recursiveAdd(valor, arbol.derecho)
             if abs(self.__getPesoNodo(arbol.derecho) - self.__getPesoNodo(arbol.izquierdo)) >= 2:
-                arbol = self.__simpleDerecha(arbol)
+                if valor > int(arbol.derecho.dato):
+                    arbol = self.__simpleDerecha(arbol)
+                else:
+                    arbol = self.__dobleDerecha(arbol)
         arbol.peso = self.__pesoMax(arbol) + 1
         return arbol
 
@@ -73,6 +79,14 @@ class AvlTree:
         arbol.peso = self.__pesoMax(arbol) + 1
         aux.peso = self.__pesoMax(aux) + 1
         return aux
+
+    def __dobleIzquierda(self, arbol):
+        arbol.izquierdo = self.__simpleDerecha(arbol.izquierdo)
+        return self.__simpleIzquierda(arbol)
+
+    def __dobleDerecha(self, arbol):
+        arbol.derecho = self.__simpleIzquierda(arbol.derecho)
+        return self.__simpleDerecha(arbol)
 
 
 
