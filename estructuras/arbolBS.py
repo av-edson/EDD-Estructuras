@@ -69,23 +69,21 @@ class ArbolBS:
             self.eliminarElemento(valor, arbol.derecho, arbol)
         else:
             # es una hoja
-            if arbol.izquierdo is None and arbol.derecho is None:
+            if arbol.izquierdo is None and arbol.derecho is None and padre is not None:
                 # borramos relacion derecha
                 if padre.derecho == arbol:
                     padre.derecho = None
                 # borramos relacion izquierda
                 else:
                     padre.izquierdo = None
-                return True
             # tiene un hijo derecho
-            elif arbol.derecho is not None and arbol.izquierdo is None:
-                print('hijo derecho')
+            elif arbol.derecho is not None and arbol.izquierdo is None and padre is not None:
                 if padre.derecho == arbol:
                     padre.derecho = arbol.derecho
                 else:
                     padre.izquierdo = arbol.derecho
             # tiene un hijo izquierdo
-            elif arbol.izquierdo is not None and arbol.derecho is None:
+            elif arbol.izquierdo is not None and arbol.derecho is None and padre is not None:
                 if padre.izquierdo == arbol:
                     padre.izquierdo = arbol.izquierdo
                 else:
@@ -115,11 +113,8 @@ class ArbolBS:
 # graficador e ingreso terminado
 arbol = ArbolBS()
 arbol.agregar(55)
-arbol.agregar(57)
 arbol.agregar(50)
-arbol.agregar(60)
 arbol.agregar(48)
-arbol.agregar(56)
 arbol.agregar(53)
 arbol.agregar(51)
 arbol.agregar(49)
