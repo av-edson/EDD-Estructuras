@@ -184,7 +184,7 @@ def mostrarMenu():
 
 
 g = AvlTree()
-g.agregar(50)
+
 while True:
     opcion = mostrarMenu()
     numero = input("Ingrese Numero: ")
